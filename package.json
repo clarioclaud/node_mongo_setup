@@ -1,0 +1,22 @@
+{
+  "name": "nodemongotask",
+  "version": "1.0.0",
+  "description": "Node Mongo task with email verification",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clarioclaud/node_mongo_setup.git"
+  },
+  "keywords": [
+    "nodemongo"
+  ],
+  "author": "Jeevitha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clarioclaud/node_mongo_setup/issues"
+  },
+  "homepage": "https://github.com/clarioclaud/node_mongo_setup#readme"
+}
