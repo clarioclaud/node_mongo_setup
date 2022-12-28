@@ -16,6 +16,5 @@ router.post('/forgotPassword', validationMiddleware.validation(passwordValidatio
 router.post('/resetPassword', validationMiddleware.validation(passwordValidation.password), userController.password);
 router.post('/login', validationMiddleware.validation(loginValidation.login), userController.login);
 router.get('/dashboard', userAuthenticate, userController.dashboard);
-router.get('/users',userController.getAllUsers);
 
 module.exports = router;

@@ -58,45 +58,7 @@ class userController {
         
     }
 
-    getAllUsers = async(req, res) => {
-
-        // mailconfig.transporter.sendMail(mailoption.otpMailOptions('jeevitha.kumar99@gmail.com', '1234')).then(info => {
-                    
-        //     console.log(info);
-
-        // }).catch(err => {
-
-        //     console.error('Error while sending email '+err.message);
-
-        // });
-        
-        // const users = await otpModel.Otp.find({}).sort({'_id':-1}).then(result => {
-
-        //     return res.status(200).send({
-        //         message: 'Users Fetched',
-        //         data: result
-        //     })
-        // }).catch(err => {
-
-        //     return res.status(500).send({
-        //         message: err.message,
-        //     })
-        // });
-
-        const users = await userModel.User.deleteOne({email:'jeevitha.kumar99@gmail.com'}).then(result => {
-
-            return res.status(200).send({
-                message: 'Users Fetched',
-                data: result
-            })
-        }).catch(err => {
-
-            return res.status(500).send({
-                message: err.message,
-            })
-        });
-    }
-
+    
     confirmOtp = async(req,res) => {
 
         const user = await userModel.User.exists({email: req.body.email});
