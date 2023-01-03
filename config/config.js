@@ -17,5 +17,8 @@ module.exports = {
     APP_NAME: process.env.APP_NAME,
     JWT_SECRET_KEY: process.env.JWT_SECRET_KEY || 'VRK2D0rFsHGJosZAmMW5LlujgLUSWxZwAoTcgo2gSaRttYPuPmbRWOaBh0mtQWts',
     JWT_EXPIRES_AT: process.env.JWT_EXPIRES_AT || '1d',
-    JWT_TOKEN_SOURCE: 'auth-token'
+    JWT_TOKEN_SOURCE: 'auth-token',
+    APP_URL: process.env.APP_URL || '',
+    PAGE_LIMIT: process.env.PAGE_LIMIT || 10,
+    KEY: process.env.KEY || '7sdsewqf24435636gfh'
 };

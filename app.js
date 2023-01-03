@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const config = require('./config/config');
 const { connect } = require('./app/models/index');
 const routeUser = require('./routes/api');
@@ -9,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use('/api', routeUser);
+app.use(express.static('app/public'));
 
 connect();
 
