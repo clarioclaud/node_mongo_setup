@@ -1,6 +1,5 @@
 const moment = require('moment');
 const { EXPIRE_TIME } = require('../../config/config');
-const otpModel = require('../models/otp');
 
 const otpGenerate = () => {
 

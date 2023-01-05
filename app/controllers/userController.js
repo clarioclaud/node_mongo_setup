@@ -7,7 +7,7 @@ const jwt = require('../services/jwtService');
 const mailoption = require('../mail/mailOptions');
 const moment = require('moment');
 
-class userController {
+class UserController {
     create = async(req, res) => {
 
         const user = {
@@ -65,7 +65,7 @@ class userController {
             
         if (user) {
 
-            const otp = await otpModel.Otp.findOne({email: req.body.email}).sort({'_id':-1}).limit(1);
+            const otp = await otpModel.Otp.findOne({email: req.body.email}).sort({'createdAt': -1}).limit(1);
                 
             if ((otp.otp == req.body.otp) && (otp.expired_at > moment().format('YYYY-MM-DD HH:mm'))) {
                 
@@ -184,4 +184,4 @@ class userController {
     }
 }
 
-module.exports = new userController();
+module.exports = new UserController();

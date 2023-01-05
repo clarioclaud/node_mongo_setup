@@ -4,7 +4,7 @@ const productModel = require('../models/product');
 const { PAGE_LIMIT } = require('../../config/config');
 const fs = require('fs');
 
-class productController {
+class ProductController {
 
     csvupload = (req, res) => {
 
@@ -79,7 +79,7 @@ class productController {
 
     update = async(req, res) => {
       
-        if (!req.params.serial_no) {
+        if (!req.params.id) {
 
             return res.status(400).send({
                 message: 'Serial no required'
@@ -87,7 +87,7 @@ class productController {
 
         }
 
-        const product = await productModel.Product.findOne({serial_no: req.params.serial_no, is_deleted: 0});
+        const product = await productModel.Product.findOne({_id: req.params.id, is_deleted: 0});
 
         if (!product) {
             
@@ -110,7 +110,7 @@ class productController {
 
         await product.updateOne(productdetails).then(async result => {
 
-            const update = await productModel.Product.findOne({serial_no: req.params.serial_no, is_deleted: 0})
+            const update = await productModel.Product.findOne({_id: req.params.id, is_deleted: 0})
 
             return res.status(200).send({
                 message: 'Updated',
@@ -126,14 +126,14 @@ class productController {
 
     delete = async(req, res) => {
 
-        if (!req.params.serial_no) {
+        if (!req.params.id) {
 
             return res.status(400).send({
                 message: 'Serial no required'
             });
         }
 
-        const product = await productModel.Product.findOne({serial_no: req.params.serial_no, is_deleted: 0});
+        const product = await productModel.Product.findOne({_id: req.params.id, is_deleted: 0});
 
         if (!product) {
             
@@ -161,14 +161,14 @@ class productController {
 
         try {
                  
-            if (!req.params.serial_no) {
+            if (!req.params.id) {
 
                 return res.status(400).send({
                     message: 'Serial no required'
                 });
             }
 
-            const product = await productModel.Product.findOne({serial_no: req.params.serial_no, is_deleted:0});
+            const product = await productModel.Product.findOne({_id: req.params.id, is_deleted:0});
 
             if (!product) {
 
@@ -184,9 +184,9 @@ class productController {
 
         } catch (error) {
 
-            return res.status(500).send({
-                message: error.message
-            });   
+            return res.status(404).send({
+                message: 'No Product Found'
+            });  
         }
     }
 
@@ -209,7 +209,7 @@ class productController {
             }
             
             const products = await productModel.Product.find(active)
-                                               .sort({'_id':-1})
+                                               .sort({'createdAt': -1})
                                                .skip(req.query.page * PAGE_LIMIT)
                                                .limit(PAGE_LIMIT);
 
@@ -229,4 +229,4 @@ class productController {
 
 }
 
-module.exports = new productController();
+module.exports = new ProductController();

@@ -12,6 +12,7 @@ const fileValidation = require('../app/validation/fileUploadValidation');
 const productValidation = require('../app/validation/productValidation');
 const userController = require('../app/controllers/userController');
 const productController = require('../app/controllers/productController');
+const orderController = require('../app/controllers/orderController');
 const multer = require('../app/helpers/fileUpload');
 
 
@@ -26,10 +27,17 @@ router.get('/dashboard', userAuthenticate, userController.dashboard);
 
 //Task 2 Product Module 
 router.post('/uploadCsv', token, multer.upload.single('file'), productController.csvupload);
-router.get('/product/:serial_no',token, productController.getProduct);
+router.get('/product/:id',token, productController.getProduct);
 router.post('/addProduct', token, multer.upload.single('image'), validationMiddleware.validation(productValidation.product), productController.create);
-router.put('/updateProduct/:serial_no', token, multer.upload.single('image'), productController.update);
-router.delete('/deleteProduct/:serial_no', token, productController.delete);
-router.get('/allProducts', token, productController.allProduct);
+router.put('/updateProduct/:id', token, multer.upload.single('image'), productController.update);
+router.delete('/deleteProduct/:id', token, productController.delete);
+router.get('/allProducts', userAuthenticate, productController.allProduct);
+router.put("/purchaseStatusChange/:order_id", token, orderController.statusChange);
+router.get("/allOrders", token, orderController.allOrders);
+
+//Task 3 Product purchase (Order) by user - List of products in users page (Task 2 allProducts endpoint)
+router.post('/order/:product_id', userAuthenticate, orderController.orderPlace);
+router.get('/listOfOrders', userAuthenticate, orderController.orderList);
+router.get('/orderPurchased/:order_id', userAuthenticate, orderController.getOneOrder);
 
 module.exports = router;
